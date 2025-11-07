@@ -23,7 +23,7 @@ export async function createDbConnection() {
       ? false
       : {
           rejectUnauthorized: true,
-          ca: fs.readFileSync(path.resolve('./certs/DigiCertGlobalRootCA.crt.pem')),
+          ca: fs.readFileSync(path.resolve('./certs/DigiCertGlobalRootG2.crt.pem')),
         },
     connectTimeout: 10000,
     maxIdle: 0,
