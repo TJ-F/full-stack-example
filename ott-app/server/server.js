@@ -49,21 +49,23 @@ app.use('/api', customerRoutes());
 
 
 async function startServer() {
-    try {
-        const db = await createDbConnection();
-        if (!db) { console.error("Database connection failed"); }
-        app.locals.db = db;
+  try {
+    const db = createDbConnection();
 
-        const PORT = process.env.PORT || 8080;
+    // Verify DB connection before boot
+    await db.query('SELECT 1');
 
-        app.listen(PORT, () => {
-            console.log(`Server is running on port ${PORT}`);
-        });
-    } catch (error) {
-        console.error('Database connection failed:', error.message);
-        console.error(error); // This shows sqlState or code
-        process.exit(1);
-    }
+    app.locals.db = db;
+
+    const PORT = process.env.PORT || 8080;
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error('Database connection failed:', error.message);
+    console.error(error);
+    process.exit(1);
+  }
 }
 
 startServer();
