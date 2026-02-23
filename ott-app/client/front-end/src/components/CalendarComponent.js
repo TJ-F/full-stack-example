@@ -27,7 +27,7 @@ function CalendarComponent({ onDateChange }) {
         // date can only be today or later
         minDate={new Date()}
       />
-      <p>Selected date: {date.toDateString()}</p>
+      <p style="background-color: white;">Selected date: {date.toDateString()}</p>
     </div>
   );
 }
